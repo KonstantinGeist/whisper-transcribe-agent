@@ -46,7 +46,7 @@ func main() {
 
 	go func() {
 		http.HandleFunc("/", serveUploadForm)
-		http.HandleFunc("/upload", func(w http.ResponseWriter, r *http.Request) {
+		http.HandleFunc("/transcribe/upload", func(w http.ResponseWriter, r *http.Request) {
 			uploadHandler(w, r, *baseURL, *whisperModel, *maxAudioSize)
 		})
 		log.Printf("UI server listening on :%s...", *uiPort)
@@ -156,7 +156,7 @@ func serveUploadForm(w http.ResponseWriter, r *http.Request) {
 </head>
 <body>
   <h2>Upload Audio File for Transcription</h2>
-  <form action="/upload" method="post" enctype="multipart/form-data" onsubmit="showProcessing()">
+  <form action="/transcribe/upload" method="post" enctype="multipart/form-data" onsubmit="showProcessing()">
     <input type="file" name="file" accept="audio/*" required>
     <input type="submit" value="Upload">
   </form>
